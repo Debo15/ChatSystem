@@ -9,19 +9,19 @@ export default function Signup() {
 	const passwordConfirmRef = useRef();
 	const [loading, setLoading] = useState(false);
 	const [error, setError] = useState("");
-	const { currentUser, signup } = useAuth();
+	const { /*currentUser, */ signup } = useAuth();
 	
 
 	async function handleSubmit(e){
 		e.preventDefault();
-		setLoading(true);
 		const [password, passwordConfirm, email] = 
 		[passwordRef.current.value,
-		passwordConfirmRef.current.value,
-		emailRef.current.value]
-
+			passwordConfirmRef.current.value,
+			emailRef.current.value]
+			
 		if (password !== passwordConfirm)
-			return setLoading(false), setError("Passwords don't match !!");
+			return setError("Passwords don't match !!");
+		setLoading(true);
 		
 		try{
 			setError('')
@@ -36,7 +36,7 @@ export default function Signup() {
 	<Card className = "w-100" style = {{maxWidth: "400px"}}>
 		<Card.Header className = 'd-flex flex-column '>
 		<h2 className = "text-center pb-2" >Sign Up</h2>
-		{currentUser.email}
+		{/* {currentUser.email} */}
 		{error && <Alert variant = "danger">{error}</Alert>}
 		</Card.Header>
 		
