@@ -1,5 +1,6 @@
 import React, { useRef, useState } from 'react';
 import {Card, Form, Button, Alert} from "react-bootstrap"
+import { Link } from 'react-router-dom';
 import {useAuth} from "../context/AuthContext"
 
 
@@ -58,7 +59,7 @@ export default function Signup() {
 			</Form>
 		</Card.Body>
 		<Card.Footer className = "d-flex flex-column justify-content-between">
-			<span className = "text-secondary">do you have an account Already? <span className = 'text-primary font-weight-bold' >Sign In Now !!</span></span>
+			<span className = "text-secondary">do you have an account Already? <Link to = "/signin" >Sign In Now !!</Link></span>
 			
 			{/* <span className = 'text-primary font-weight-bold m-2' >forgot your password?</span> */}
 		</Card.Footer>

@@ -8,6 +8,7 @@ import SideBar from './component/sideBar';
 import AuthProvider from './context/AuthContext';
 import {BrowserRouter as Router, Switch, Route} from "react-router-dom"
 import Home from './component/home';
+import PrivateRoute from "./PrivateRoute"
 function App() {
   return (
     <Container className = "w-100 d-flex flex-column justify-content-center">
@@ -22,7 +23,7 @@ function App() {
             <div className="header w-100 mb-5">
               <p className = "title">Chat System</p>
             </div>
-            <Route exact path = "/" component = {Home} />
+            <PrivateRoute exact path = "/" component = {Home} />
             <div className = "w-100 d-flex justify-content-center ">
               
               <Route path = "/signup" component = {Signup} />

@@ -5,6 +5,6 @@ import Signup from './Signup';
 export default function Home(){
 	const {currentUser} = useAuth();
 	return (
-	<h1>this is the home page mr {currentUser}</h1>
+	<h1>this is the home page mr {currentUser.email}</h1>
 	)
 }

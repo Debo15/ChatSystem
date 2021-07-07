@@ -1,8 +1,9 @@
 import React from 'react';
 import { useState } from 'react';
 import { useRef } from 'react';
-import { Card, Form, Button} from "react-bootstrap"
-
+import { Card, Form, Button, Alert} from "react-bootstrap"
+import { useAuth } from '../context/AuthContext';
+import { useHistory } from 'react-router-dom';
 
 export default function Signin(){
 
@@ -10,15 +11,33 @@ export default function Signin(){
 	const passwordRef = useRef();
 	const [loading, setLoading] = useState(false);
 	const [error, setError] = useState('');
+	const { signin } = useAuth();
+	const history = useHistory();
 	
+	async function handleSubmit(e){
+		e.preventDefault();
+		
+		const [email, password] = [emailRef.current.value, passwordRef.current.value];
+		setError('')
+		setLoading(true);
+		try{
+			await signin(email, password)
+			history.push('/');
+		}catch{
+			setError("email and password ain't match !")
+		}
+		setLoading(false);
+
+	}
 
 	return ( 
 		<Card className = "w-100" style = {{maxWidth: "400px"}}>
-		<Card.Header className = 'd-flex justify-content-center'>
-		<h2 >Sign In</h2>
+		<Card.Header className = 'd-flex flex-column'>
+		<h2 className = "text-center mb-3">Sign In</h2>
+		{error && <Alert variant = "danger">{error}</Alert>}
 		</Card.Header>
 		<Card.Body>
-			<Form >
+			<Form onSubmit = {handleSubmit}>
 				<Form.Group id="email">
 					<Form.Label>Your Email: </Form.Label>
 					<Form.Control className = "font-weight-bold" type = 'email' ref = {emailRef} required />
