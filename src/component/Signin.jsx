@@ -23,8 +23,11 @@ export default function Signin(){
 		try{
 			await signin(email, password)
 			history.push('/');
-		}catch{
-			setError("email and password ain't match !")
+		}catch(err){
+			if (err.code === 'auth/wrong-password')
+				setError('Wrong password');
+			else
+				setError("email and password ain't match !")
 		}
 		setLoading(false);
 
@@ -47,7 +50,7 @@ export default function Signin(){
 					<Form.Control className = "font-weight-bold" type = 'password' ref = {passwordRef} required />
 				</Form.Group>
 				
-				<Button type = "submit" className = "font-weight-bold w-100"> Sign In</Button>
+				<Button disabled = {loading} type = "submit" className = "font-weight-bold w-100"> Sign In</Button>
 			</Form>
 		</Card.Body>
 		<Card.Footer className = "d-flex justify-content-end">

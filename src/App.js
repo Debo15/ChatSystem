@@ -9,6 +9,8 @@ import AuthProvider from './context/AuthContext';
 import {BrowserRouter as Router, Switch, Route} from "react-router-dom"
 import Home from './component/home';
 import PrivateRoute from "./PrivateRoute"
+import PublicRoute from './PublicRoute';
+import ProfileSettings from './component/ProfileSettings';
 function App() {
   return (
     <Container className = "w-100 d-flex flex-column justify-content-center">
@@ -25,9 +27,9 @@ function App() {
             </div>
             <PrivateRoute exact path = "/" component = {Home} />
             <div className = "w-100 d-flex justify-content-center ">
-              
-              <Route path = "/signup" component = {Signup} />
-              <Route path = "/signin" component = {Signin} />
+              <PrivateRoute path = "/settings" component = {ProfileSettings} />
+              <PublicRoute path = "/signup" component = {Signup} />
+              <PublicRoute path = "/signin" component = {Signin} />
             </div>
           </Col>
         </Row>

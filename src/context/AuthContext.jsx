@@ -16,9 +16,17 @@ export default function AuthProvider({ children }){
 		signup,
 		signin,
 		signout,
+		updateEmail,
+		updatePassword,
 	}
 	function signup(email, password){
 		return auth.createUserWithEmailAndPassword(email, password);
+	}
+	function updateEmail(email){
+		return currentUser.updateEmail(email);
+	}
+	function updatePassword(password){
+		return currentUser.updatePassword(password);
 	}
 	function signin(email, password){
 		return auth.signInWithEmailAndPassword(email, password);
@@ -29,8 +37,8 @@ export default function AuthProvider({ children }){
 	useEffect(() => {
 		const unsubscribe = auth.onAuthStateChanged(user =>{
 			setCurrentUser(user);
+			setLoading(false);
 		});
-		setLoading(false);
 	
 		return unsubscribe;
 	
